@@ -3,18 +3,18 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 import ExitIcon from "@material-ui/icons/ExitToApp";
 import DeleteIcon from "@material-ui/icons/Delete";
-import MenuIcon from "@material-ui/icons/Menu";
 
 import {
   Divider,
   List,
   ListItem,
-  Tab,
-  Tabs,
-  TextField
+  TextField,
+  Input
 } from "../node_modules/@material-ui/core";
 
 import "./Orderscreen.css";
@@ -29,52 +29,32 @@ class Orderscreen extends Component {
     this.state = {
       //label: "Beispielprodukt", value:"Beispielprodukt"
       productList: products,
-      lastProductOrder: [],
-      productOrder: [],
-      exampleOrder: [
-        { name: "Cervelat", count: "100 Paar" },
-        { name: "Salatsauce French", count: "3" },
-        { name: "Wurstsalat", count: "10 Stück" },
-        { name: "Steak vac", count: "20" },
-        { name: "Wasser", count: "6" },
-        { name: "Bratwurst", count: "12" }
-      ],
+      lastproductInvoice: [],
+      productInvoice: [],
+      exampleInvoice: [],
       inputValue: ""
     };
 
     //TODO: this.getLastOrders();
   }
 
-  getLastOrders = () => {
-    //TODO: Get last Orders and set last as example
-  };
-
   logout = () => {
     this.props.appContext.setState({ token: null });
   };
 
-  loadPreviousOrder = event => {
-    //TODO: LOAD from SERVER :)
-    const orderId = event.target.getAttribute("id");
-    const example = this.state.exampleOrder;
-    this.setState({
-      productOrder: example
-    });
-  };
-
   deleteItem = event => {
     const index = event.target.getAttribute("id");
-    const tempList = [...this.state.productOrder];
+    const tempList = [...this.state.productInvoice];
     tempList.splice(index, 1);
-    this.setState({ productOrder: tempList });
+    this.setState({ productInvoice: tempList });
   };
 
-  clearOrderList = () => {
-    this.setState({ productOrder: [] });
+  clearProductList = () => {
+    this.setState({ productInvoice: [] });
   };
 
-  sendOrder = () => {
-    console.log("sendOrder");
+  sendInvoice = () => {
+    console.log("sendInvoice");
   };
 
   _handleChange = (newValue, actionMeta) => {
@@ -88,33 +68,24 @@ class Orderscreen extends Component {
       console.log(newValue);
       console.log(actionMeta);
       newProduct.name = newValue.label;
-      var tempList = this.state.productOrder;
+      var tempList = this.state.productInvoice;
 
-      /*Swal({
-        title: 'Menge für ' + newProduct.name,
-        text: ,
-        input:'text',
-        showCancelButton: true,
-        confirmButtonText: 'Hinzufügen',
-        cancelButtonText: 'Abbrechen'
-      })*/
-
-      orderInput(newProduct, "Menge für ", "Anzahl | Grösse | Gewicht").then(
+      orderInput(newProduct, "Menge für ", "Anzahl | Stunden | Stück").then(
         result => {
           if (result.value) {
             newProduct.count = result.value;
             tempList.unshift(newProduct);
-            this.setState({ productOrder: tempList });
+            this.setState({ productInvoice: tempList });
           }
         }
       );
     }
   };
-  //TODO: Tabs Layout and Code Refactoring FIX
-  productListRender = () => {
+
+  customerListRender = () => {
     const that = this;
-    if (this.state.productOrder.length != 0) {
-      return this.state.productOrder.map(function(product, index) {
+    if (this.state.productInvoice.length != 0) {
+      return this.state.productInvoice.map(function(product, index) {
         return (
           <ListItem key={index}>
             <TextField type="text" value={product.count} />
@@ -135,9 +106,35 @@ class Orderscreen extends Component {
         );
       });
     } else {
-      return (
-        <ListItem>Noch keine Produkte auf der nächsten Bestellung....</ListItem>
-      );
+      return <ListItem>Bitte Kunde auswählen..</ListItem>;
+    }
+  };
+  //TODO: Tabs Layout and Code Refactoring FIX
+  productListRender = () => {
+    const that = this;
+    if (this.state.productInvoice.length != 0) {
+      return this.state.productInvoice.map(function(product, index) {
+        return (
+          <ListItem key={index}>
+            <TextField type="text" value={product.count} />
+            <TextField
+              type="text"
+              value={product.name}
+              style={{ marginLeft: 20, paddingRight: 50 }}
+            />
+            <Button
+              id={index}
+              variant="fab"
+              aria-label="Delete"
+              onClick={that.deleteItem}
+            >
+              <DeleteIcon />
+            </Button>
+          </ListItem>
+        );
+      });
+    } else {
+      return <ListItem>Noch keine Leistungen vorhanden</ListItem>;
     }
   };
 
@@ -145,18 +142,23 @@ class Orderscreen extends Component {
     return (
       <MuiThemeProvider>
         <div style={{ display: "inline-block", width: "90%" }}>
-          <AppBar position="fixed" style={{ display: "inline-block" }}>
+          <AppBar
+            position="fixed"
+            style={{ display: "inline-block", backgroundColor: "#cc0033" }}
+          >
             <div style={{ display: "inline" }}>
               <Button onClick={this.logout}>
                 Abmelden <ExitIcon />
               </Button>
             </div>
             <Typography variant="headline" style={{ margin: 10 }}>
-              Neue Bestellung | 12345
+              Neue Offerte/Rechnung | 12345
             </Typography>
           </AppBar>
           <div style={{ marginTop: 100 }}>
-            <Typography variant="headline">Produkt hinzufügen</Typography>
+            <Typography variant="subheading" style={style}>
+              Kunde / Leistung hinzufügen
+            </Typography>
             <CreatableSelect
               autoFocus
               isClearable
@@ -164,35 +166,67 @@ class Orderscreen extends Component {
               onChange={this._handleChange}
               style={center}
               value={this.state.inputValue}
-              placeholder="Produktname | Artikelnummer"
+              placeholder="Kunde | Produkt | Leistung"
               options={this.state.productList}
             />
           </div>
-          <Tabs onChange={this.loadPreviousOrder} style={center}>
-            <Tab label="1323" id="11" style={{ margin: "0 auto" }} />
-            <Tab label="12091" id="22" style={{ margin: "0 auto" }} />
-            <Tab label="13791" id="33" style={{ margin: "0 auto" }} />
-          </Tabs>
           <Divider />
-          <List className="productList" style={list}>
-            {this.productListRender()}
-          </List>
+          <Grid container justify="left" spacing={16}>
+            <Grid item>
+              <Paper className="customerPaper">
+                <div className="inputGroup">
+                  <div>
+                    <TextField type="text" placeholder="Kundenname" />
+                  </div>
+                  <div>
+                    <TextField type="text" placeholder="Adresse" />
+                  </div>
+                  <div>
+                    <TextField type="text" placeholder="Stadt" />
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper className="paper">
+                <List className="productList" style={style}>
+                  {this.productListRender()}
+                </List>
+              </Paper>
+            </Grid>
+          </Grid>
           <div id="bottomBar">
             <Button
               color="secondary"
               variant="outlined"
               style={style}
-              onClick={this.clearOrderList}
+              onClick={this.clearProductList}
             >
-              Bestellung zurücksetzten
+              Rechnung zurücksetzten
             </Button>
             <Button
               color="primary"
               variant="outlined"
               style={style}
-              onClick={this.sendOrder}
+              onClick={this.sendInvoice}
             >
-              Bestellung abschicken
+              Speichern
+            </Button>
+            <Button
+              color="primary"
+              variant="outlined"
+              style={style}
+              onClick={this.sendInvoice}
+            >
+              PDF Export
+            </Button>
+            <Button
+              color="primary"
+              variant="outlined"
+              style={style}
+              onClick={this.sendInvoice}
+            >
+              Senden / IaaS
             </Button>
           </div>
         </div>
