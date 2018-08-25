@@ -29,8 +29,8 @@ class Select extends React.Component {
         isClearable
         onChange={this._handleChange}
         value={this.state.inputValue}
-        placeholder="Kunde | Produkt | Leistung"
-        options={this.state.productList}
+        placeholder={this.props.placeholder}
+        options={this.props.inputList}
       />
     );
   };

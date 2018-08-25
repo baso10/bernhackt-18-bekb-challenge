@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -8,20 +7,24 @@ import withRoot from "./withRoot";
 
 import { Divider, List, ListItem, TextField } from "@material-ui/core";
 
-import CreatableSelect from "react-select/lib/Creatable";
 import { alert } from "./Utils/Alerts";
 import Select from "./components/Select";
+
+import "./Orderscreen.css";
+import customerList from "./mockData/customer.json";
+import productList from "./mockData/product.json";
 
 class Orderscreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       //label: "Beispielprodukt", value:"Beispielprodukt"
-      productList: [],
+      productList: productList,
       lastproductInvoice: [],
       productInvoice: [],
       exampleInvoice: [],
-      inputValue: ""
+      inputValue: "",
+      customerList: customerList
     };
 
     //TODO: this.getLastOrders();
@@ -56,7 +59,7 @@ class Orderscreen extends Component {
         return (
           <ListItem key={index}>
             <TextField type="text" value={product.count} />
-            <TextField type="text" value={product.name} />
+            <p>{product.name}</p>
             <Button
               id={index}
               variant="fab"
@@ -73,7 +76,11 @@ class Orderscreen extends Component {
     }
   };
 
-  addItemToList = newItem => {
+  addCustomer = customerInput => {
+    this.setState({ customer: customerInput });
+  };
+
+  addItemToProductList = newItem => {
     console.log(newItem);
     alert("Menge für " + newItem.name, "Anzahl | Stunden | Stück")
       .then(result => {
@@ -87,59 +94,74 @@ class Orderscreen extends Component {
       .then(console.log(this.state.productList));
   };
 
-  render() {
-    return (
+  render = () => {
+    const productList = (
       <div>
-        <div>
-          <Typography variant="subheading">
-            Kunde / Leistung hinzufügen
-          </Typography>
-          <Select addItem={this.addItemToList} />
-        </div>
-        <Divider />
-        <Grid container justify="left" spacing={16}>
+        <Paper className="paper">
+          <Select
+            addItem={this.addItemToProductList}
+            placeholder={"Produkt | Leistung | Artikelnummer"}
+          />
           <Grid item>
-            <Paper className="customerPaper">
-              <div className="inputGroup">
-                <div>
-                  <TextField type="text" placeholder="Kundenname" />
-                </div>
-                <div>
-                  <TextField type="text" placeholder="Adresse" />
-                </div>
-                <div>
-                  <TextField type="text" placeholder="Stadt" />
-                </div>
-              </div>
-            </Paper>
+            <Divider />
+            <List className="productList">{this.productListRender()}</List>
           </Grid>
-          <Grid item>
-            <Paper className="paper">
-              <List className="productList">{this.productListRender()}</List>
-            </Paper>
-          </Grid>
-        </Grid>
-        <div id="bottomBar">
-          <Button
-            color="secondary"
-            variant="outlined"
-            onClick={this.clearProductList}
-          >
-            Rechnung zurücksetzten
-          </Button>
-          <Button color="primary" variant="outlined" onClick={this.sendInvoice}>
-            Speichern
-          </Button>
-          <Button color="primary" variant="outlined" onClick={this.sendInvoice}>
-            PDF Export
-          </Button>
-          <Button color="primary" variant="outlined" onClick={this.sendInvoice}>
-            Senden / IaaS
-          </Button>
-        </div>
+        </Paper>
+        <Paper>
+          <div id="bottomBar">
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={this.clearProductList}
+            >
+              Rechnung zurücksetzten
+            </Button>
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={this.sendInvoice}
+            >
+              Speichern
+            </Button>
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={this.sendInvoice}
+            >
+              PDF Export
+            </Button>
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={this.sendInvoice}
+            >
+              Senden / IaaS
+            </Button>
+          </div>
+        </Paper>
       </div>
     );
-  }
+
+    const customerInput = (
+      <Grid container spacing={2} className="customerContainer">
+        <Grid item xs={2} />
+        <Grid item xs={8}>
+          <Paper>
+            <h2 className="mainCenter">Kunde auswählen: </h2>
+            <Select
+              id="customerSelect"
+              addItem={this.addCustomer}
+              placeholder={"Name | Kundennummer | Adresse"}
+              inputList={this.state.customerList}
+            />
+          </Paper>
+        </Grid>
+        <Grid item xs={2} />
+      </Grid>
+    );
+
+    return this.state.customer ? productList : customerInput;
+  };
 }
 
 export default withRoot(Orderscreen);

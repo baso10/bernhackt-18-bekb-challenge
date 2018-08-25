@@ -1,0 +1,53 @@
+[{
+    "ID": 1,
+    "value": "Bänz",
+    "label": "Bänz",
+    "street": "Zentrumstrasse",
+    "houseNo": 1,
+    "city": "Bern",
+    "zip": 3000,
+    "level": 16,
+    "points": "20000",
+    "contactHours": "13:00-16:00",
+    "private": false
+  },
+  {
+    "ID": 2,
+    "value": "Frau Iseli",
+    "label": "Frau Iseli",
+    "street": "Worbstrasse",
+    "houseNo": 666,
+    "city": "Bern",
+    "zip": 3000,
+    "level": 0,
+    "points": "0",
+    "contactHours": "",
+    "private": true
+  },
+  {
+    "ID": 3,
+    "value": "Gärtnerutensilien GmbH",
+    "label": "Gärtnerutensilien GmbH",
+    "street": "Bernstrasse",
+    "houseNo": 5,
+    "city": "Worb",
+    "zip": 3076,
+    "level": 12,
+    "points": "16000",
+    "contactHours": "09:00-17:00",
+    "private": false
+  },
+  {
+    "ID": 4,
+    "value": "Bernnhard Schlick",
+    "label": "Bernnhard Schlick",
+    "street": "Schwarzenburg",
+    "houseNo": 5,
+    "city": "Worb",
+    "zip": 3076,
+    "level": 12,
+    "points": "16000",
+    "contactHours": "09:00-17:00",
+    "private": false
+  }
+]

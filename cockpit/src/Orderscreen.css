@@ -1,0 +1,20 @@
+.customerPaperItem {
+    margin: "0 auto";
+    padding: 10
+}
+
+.mainCenter {
+    text-align: center;
+    margin: 10 auto;
+    margin-top: 20;
+    padding: 1em;
+}
+
+#customerSelect {
+    margin: 0 auto;
+    width: 60%;
+}
+
+#customerTitleText {
+    align-content: center;
+}
