@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 
 import ExitIcon from "@material-ui/icons/ExitToApp";
 import DeleteIcon from "@material-ui/icons/Delete";
-import MenuIcon from "@material-ui/icons/Menu";
+import withRoot from "./withRoot";
 
 import {
   Divider,
@@ -15,10 +14,9 @@ import {
   Tab,
   Tabs,
   TextField
-} from "../node_modules/@material-ui/core";
+} from "@material-ui/core";
 
 import "./Orderscreen.css";
-import products from "./products.json";
 
 import CreatableSelect from "react-select/lib/Creatable";
 import { orderInput } from "./Utils/Alerts";
@@ -28,7 +26,7 @@ class Orderscreen extends Component {
     super(props);
     this.state = {
       //label: "Beispielprodukt", value:"Beispielprodukt"
-      productList: products,
+      productList: [],
       lastProductOrder: [],
       productOrder: [],
       exampleOrder: [
@@ -55,7 +53,6 @@ class Orderscreen extends Component {
 
   loadPreviousOrder = event => {
     //TODO: LOAD from SERVER :)
-    const orderId = event.target.getAttribute("id");
     const example = this.state.exampleOrder;
     this.setState({
       productOrder: example
@@ -89,15 +86,6 @@ class Orderscreen extends Component {
       console.log(actionMeta);
       newProduct.name = newValue.label;
       var tempList = this.state.productOrder;
-
-      /*Swal({
-        title: 'Menge für ' + newProduct.name,
-        text: ,
-        input:'text',
-        showCancelButton: true,
-        confirmButtonText: 'Hinzufügen',
-        cancelButtonText: 'Abbrechen'
-      })*/
 
       orderInput(newProduct, "Menge für ", "Anzahl | Grösse | Gewicht").then(
         result => {
@@ -143,60 +131,58 @@ class Orderscreen extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div style={{ display: "inline-block", width: "90%" }}>
-          <AppBar position="fixed" style={{ display: "inline-block" }}>
-            <div style={{ display: "inline" }}>
-              <Button onClick={this.logout}>
-                Abmelden <ExitIcon />
-              </Button>
-            </div>
-            <Typography variant="headline" style={{ margin: 10 }}>
-              Neue Bestellung | 12345
-            </Typography>
-          </AppBar>
-          <div style={{ marginTop: 100 }}>
-            <Typography variant="headline">Produkt hinzufügen</Typography>
-            <CreatableSelect
-              autoFocus
-              isClearable
-              onKeyDown={this._addProductOnEnter}
-              onChange={this._handleChange}
-              style={center}
-              value={this.state.inputValue}
-              placeholder="Produktname | Artikelnummer"
-              options={this.state.productList}
-            />
-          </div>
-          <Tabs onChange={this.loadPreviousOrder} style={center}>
-            <Tab label="1323" id="11" style={{ margin: "0 auto" }} />
-            <Tab label="12091" id="22" style={{ margin: "0 auto" }} />
-            <Tab label="13791" id="33" style={{ margin: "0 auto" }} />
-          </Tabs>
-          <Divider />
-          <List className="productList" style={list}>
-            {this.productListRender()}
-          </List>
-          <div id="bottomBar">
-            <Button
-              color="secondary"
-              variant="outlined"
-              style={style}
-              onClick={this.clearOrderList}
-            >
-              Bestellung zurücksetzten
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              style={style}
-              onClick={this.sendOrder}
-            >
-              Bestellung abschicken
+      <div style={{ display: "inline-block", width: "90%" }}>
+        {/* <AppBar position="fixed" style={{ display: "inline-block" }}>
+          <div style={{ display: "inline" }}>
+            <Button onClick={this.logout}>
+              Abmelden <ExitIcon />
             </Button>
           </div>
+          <Typography variant="headline" style={{ margin: 10 }}>
+            Neue Bestellung | 12345
+          </Typography>
+        </AppBar> */}
+        <div style={{ marginTop: 100 }}>
+          <Typography variant="headline">Produkt hinzufügen</Typography>
+          <CreatableSelect
+            autoFocus
+            isClearable
+            onKeyDown={this._addProductOnEnter}
+            onChange={this._handleChange}
+            style={center}
+            value={this.state.inputValue}
+            placeholder="Produktname | Artikelnummer"
+            options={this.state.productList}
+          />
         </div>
-      </MuiThemeProvider>
+        <Tabs onChange={this.loadPreviousOrder} style={center}>
+          <Tab label="1323" id="11" style={{ margin: "0 auto" }} />
+          <Tab label="12091" id="22" style={{ margin: "0 auto" }} />
+          <Tab label="13791" id="33" style={{ margin: "0 auto" }} />
+        </Tabs>
+        <Divider />
+        <List className="productList" style={list}>
+          {this.productListRender()}
+        </List>
+        <div id="bottomBar">
+          <Button
+            color="secondary"
+            variant="outlined"
+            style={style}
+            onClick={this.clearOrderList}
+          >
+            Bestellung zurücksetzten
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            style={style}
+            onClick={this.sendOrder}
+          >
+            Bestellung abschicken
+          </Button>
+        </div>
+      </div>
     );
   }
 }
@@ -217,4 +203,4 @@ const list = {
   margin: "0 auto"
 };
 
-export default Orderscreen;
+export default withRoot(Orderscreen);
