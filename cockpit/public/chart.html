@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>Chart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+
+  </head>
+  <body>
+    <div style="width: 100%; height: 400px; position: relative; display: block;">
+
+      <canvas id="myChart" style="display: block; width: 100%; height: 400px;"></canvas>
+      <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+        function randomNumber(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        function randomBar(date, lastClose) {
+          var open = randomNumber(lastClose * 0.95, lastClose * 1.05);
+          var close = Math.round(randomNumber(open * 0.95, open * 1.05));
+          return {
+            t: date.valueOf(),
+            y: close
+          };
+        }
+
+        var dateFormat = 'MMMM DD YYYY';
+        var date = moment('November 01 2017', dateFormat);
+        var data = [randomBar(date, 15000)];
+        var labels = [date];
+        var dataForecast = [];
+        var i = 0;
+        while (i < 18) {
+          i++;
+          date = date.clone().add(1, 'M');
+          if (data.length > 9) {
+            dataForecast.push(randomBar(date, data[data.length - 1].y));
+          } else {
+            var data1 = randomBar(date, data[data.length - 1].y);
+            data.push(data1);
+            if (data.length > 9) {
+              dataForecast.push(data1);
+            }
+          }
+          labels.push(date);
+        }
+
+        let color = 'rgba(204, 0, 51, 1)';
+        let colorForeccast = 'rgba(136, 128, 103, 1)';
+
+        var cfg = {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+                label: 'Cashflow',
+                data: data,
+                type: 'line',
+                pointRadius: 0,
+                fill: false,
+                borderColor: color,
+                lineTension: 0,
+                borderWidth: 2
+              },
+              {
+                label: 'Prediction',
+                data: dataForecast,
+                type: 'line',
+                pointRadius: 0,
+                fill: false,
+                borderColor: colorForeccast,
+                lineTension: 0,
+                borderWidth: 2
+              }]
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                  type: 'time',
+                  distribution: 'series',
+//                  ticks: {
+//                    source: 'labels'
+//                  },
+                  time: {
+                    unit: 'month'
+                  }
+                }],
+              yAxes: [{
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Betrag (CHF)'
+                  }
+                }]
+            }
+          }
+        };
+
+        var myChart = new Chart(ctx, cfg);
+      </script>
+
+    </div>
+  </body>
+</html>
