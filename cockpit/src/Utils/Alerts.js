@@ -1,14 +1,14 @@
 import Swal from "sweetalert2";
 
-export const orderInput = (product, title, text) => {
+export const alert = (title, text) => {
   return Swal({
-    title: title + product.name,
+    title: title,
     text: text,
     input: "text",
     showCancelButton: true,
-    confirmButtonText: "Hinzufügen",
-    cancelButtonText: "Abbrechen"
+    confirmButtonText: "Speichern",
+    cancelButtonText: "Zurück"
   });
 };
 
-export default orderInput;
+export default alert;

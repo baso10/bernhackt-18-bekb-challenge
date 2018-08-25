@@ -8,10 +8,9 @@ import withRoot from "./withRoot";
 
 import { Divider, List, ListItem, TextField } from "@material-ui/core";
 
-import "./Orderscreen.css";
-
 import CreatableSelect from "react-select/lib/Creatable";
-import { orderInput } from "./Utils/Alerts";
+import { alert } from "./Utils/Alerts";
+import Select from "./components/Select";
 
 class Orderscreen extends Component {
   constructor(props) {
@@ -27,6 +26,8 @@ class Orderscreen extends Component {
 
     //TODO: this.getLastOrders();
   }
+
+  componentDidMount() {}
 
   logout = () => {
     this.props.appContext.setState({ token: null });
@@ -47,58 +48,6 @@ class Orderscreen extends Component {
     console.log("sendInvoice");
   };
 
-  _handleChange = (newValue, actionMeta) => {
-    var newProduct = {
-      name: "",
-      count: ""
-    };
-
-    if (newValue.length !== 0) {
-      this.setState({ inputValue: newValue });
-      console.log(newValue);
-      console.log(actionMeta);
-      newProduct.name = newValue.label;
-      var tempList = this.state.productInvoice;
-
-      orderInput(newProduct, "Menge für ", "Anzahl | Stunden | Stück").then(
-        result => {
-          if (result.value) {
-            newProduct.count = result.value;
-            tempList.unshift(newProduct);
-            this.setState({ productInvoice: tempList });
-          }
-        }
-      );
-    }
-  };
-
-  customerListRender = () => {
-    const that = this;
-    if (this.state.productInvoice.length !== 0) {
-      return this.state.productInvoice.map(function(product, index) {
-        return (
-          <ListItem key={index}>
-            <TextField type="text" value={product.count} />
-            <TextField
-              type="text"
-              value={product.name}
-              style={{ width: "50em", marginLeft: 20, paddingRight: 100 }}
-            />
-            <Button
-              id={index}
-              variant="fab"
-              aria-label="Delete"
-              onClick={that.deleteItem}
-            >
-              <DeleteIcon />
-            </Button>
-          </ListItem>
-        );
-      });
-    } else {
-      return <ListItem>Bitte Kunde auswählen..</ListItem>;
-    }
-  };
   //TODO: Tabs Layout and Code Refactoring FIX
   productListRender = () => {
     const that = this;
@@ -107,11 +56,7 @@ class Orderscreen extends Component {
         return (
           <ListItem key={index}>
             <TextField type="text" value={product.count} />
-            <TextField
-              type="text"
-              value={product.name}
-              style={{ marginLeft: 20, paddingRight: 50 }}
-            />
+            <TextField type="text" value={product.name} />
             <Button
               id={index}
               variant="fab"
@@ -128,36 +73,28 @@ class Orderscreen extends Component {
     }
   };
 
+  addItemToList = newItem => {
+    console.log(newItem);
+    alert("Menge für " + newItem.name, "Anzahl | Stunden | Stück")
+      .then(result => {
+        if (result.value) {
+          newItem.count = result.value;
+          this.setState(curState => ({
+            productInvoice: [...curState.productInvoice, newItem]
+          }));
+        }
+      })
+      .then(console.log(this.state.productList));
+  };
+
   render() {
     return (
-      <div style={{ display: "inline-block", width: "90%" }}>
-        {/* <AppBar
-            position="fixed"
-            style={{ display: "inline-block", backgroundColor: "#cc0033" }}
-          >
-            <div style={{ display: "inline" }}>
-              <Button onClick={this.logout}>
-                Abmelden <ExitIcon />
-              </Button>
-            </div>
-            <Typography variant="headline" style={{ margin: 10 }}>
-              Neue Offerte/Rechnung | 12345
-            </Typography>
-          </AppBar> */}
-        <div style={{ marginTop: 100 }}>
-          <Typography variant="subheading" style={style}>
+      <div>
+        <div>
+          <Typography variant="subheading">
             Kunde / Leistung hinzufügen
           </Typography>
-          <CreatableSelect
-            autoFocus
-            isClearable
-            onKeyDown={this._addProductOnEnter}
-            onChange={this._handleChange}
-            style={center}
-            value={this.state.inputValue}
-            placeholder="Kunde | Produkt | Leistung"
-            options={this.state.productList}
-          />
+          <Select addItem={this.addItemToList} />
         </div>
         <Divider />
         <Grid container justify="left" spacing={16}>
@@ -178,9 +115,7 @@ class Orderscreen extends Component {
           </Grid>
           <Grid item>
             <Paper className="paper">
-              <List className="productList" style={style}>
-                {this.productListRender()}
-              </List>
+              <List className="productList">{this.productListRender()}</List>
             </Paper>
           </Grid>
         </Grid>
@@ -188,33 +123,17 @@ class Orderscreen extends Component {
           <Button
             color="secondary"
             variant="outlined"
-            style={style}
             onClick={this.clearProductList}
           >
             Rechnung zurücksetzten
           </Button>
-          <Button
-            color="primary"
-            variant="outlined"
-            style={style}
-            onClick={this.sendInvoice}
-          >
+          <Button color="primary" variant="outlined" onClick={this.sendInvoice}>
             Speichern
           </Button>
-          <Button
-            color="primary"
-            variant="outlined"
-            style={style}
-            onClick={this.sendInvoice}
-          >
+          <Button color="primary" variant="outlined" onClick={this.sendInvoice}>
             PDF Export
           </Button>
-          <Button
-            color="primary"
-            variant="outlined"
-            style={style}
-            onClick={this.sendInvoice}
-          >
+          <Button color="primary" variant="outlined" onClick={this.sendInvoice}>
             Senden / IaaS
           </Button>
         </div>
@@ -222,15 +141,5 @@ class Orderscreen extends Component {
     );
   }
 }
-const style = {
-  margin: 30,
-  padding: 10
-};
-
-const center = {
-  display: "block",
-  maxWidth: "500px",
-  margin: "auto"
-};
 
 export default withRoot(Orderscreen);
