@@ -11,3 +11,9 @@
     overflow: "scroll";
     height: "400px";
 }
+
+.customerPaper {
+    height: 250px;
+    margin: 2em;
+    align-content: left;
+}
