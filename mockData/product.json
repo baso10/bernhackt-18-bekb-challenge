@@ -1,0 +1,20 @@
+[
+  {
+    "ID": 1,
+    "name": "Gartenarbeiten",
+    "rate": 30,
+    "hourly": true
+  },
+  {
+    "ID": 2,
+    "name": "Kräutergartenset",
+    "rate": 80,
+    "hourly": false
+  },
+  {
+    "ID": 3,
+    "name": "Administration",
+    "rate": 20,
+    "hourly": true
+  }
+]

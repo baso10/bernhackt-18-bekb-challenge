@@ -33,6 +33,7 @@ class Login extends Component {
         <Card className="row">
           <CardContent className="flex-item">
             <img src={Logo} alt="Logo" style={{ width: "35%" }} />
+            <h2>BÄNZin</h2>
             <div onKeyDown={this.handleKeyPress}>
               <TextField
                 type="text"
