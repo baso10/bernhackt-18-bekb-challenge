@@ -1,22 +1,12 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-
-import ExitIcon from "@material-ui/icons/ExitToApp";
 import DeleteIcon from "@material-ui/icons/Delete";
 import withRoot from "./withRoot";
 
-import {
-  Divider,
-  List,
-  ListItem,
-  Tab,
-  Tabs,
-  TextField
-} from "@material-ui/core";
+import { Divider, List, ListItem, TextField } from "@material-ui/core";
 
 import "./Orderscreen.css";
 
@@ -63,7 +53,7 @@ class Orderscreen extends Component {
       count: ""
     };
 
-    if (newValue.length != 0) {
+    if (newValue.length !== 0) {
       this.setState({ inputValue: newValue });
       console.log(newValue);
       console.log(actionMeta);
@@ -84,7 +74,7 @@ class Orderscreen extends Component {
 
   customerListRender = () => {
     const that = this;
-    if (this.state.productInvoice.length != 0) {
+    if (this.state.productInvoice.length !== 0) {
       return this.state.productInvoice.map(function(product, index) {
         return (
           <ListItem key={index}>
@@ -112,7 +102,7 @@ class Orderscreen extends Component {
   //TODO: Tabs Layout and Code Refactoring FIX
   productListRender = () => {
     const that = this;
-    if (this.state.productInvoice.length != 0) {
+    if (this.state.productInvoice.length !== 0) {
       return this.state.productInvoice.map(function(product, index) {
         return (
           <ListItem key={index}>
@@ -241,12 +231,6 @@ const center = {
   display: "block",
   maxWidth: "500px",
   margin: "auto"
-};
-
-const list = {
-  overflow: "scroll",
-  height: "350px",
-  margin: "0 auto"
 };
 
 export default withRoot(Orderscreen);

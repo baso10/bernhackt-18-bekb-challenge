@@ -34,6 +34,7 @@ class CashFlowChart extends React.Component {
         });
       }
       labels.push(moment(val.time, "DD.MM.YYYY"));
+      return val;
     });
 
     let color = "rgba(204, 0, 51, 1)";
