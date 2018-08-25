@@ -1,6 +1,6 @@
 {
   "ID": 0,
-  "amount": 0,
+  "amount": "0",
   "dueDate": "YYYY-MM-DD",
   "payDate": "YYYY-MM-DD",
   "seller": 0,
