@@ -1,18 +1,57 @@
 [
   {
-    "time": "25.8.2018",
-    "value": 15000
+    "time": "01.05.2018",
+    "actual": 11000,
+    "forecast": null
   },
   {
-    "time": "26.8.2018",
-    "value": 15000
+    "time": "01.06.2018",
+    "actual": 15000,
+    "forecast": null
   },
   {
-    "time": "31.8.2018",
-    "value": 15000
+    "time": "01.07.2018",
+    "actual": 14000,
+    "forecast": null
   },
   {
-    "time": "15.9.2018",
-    "value": 15000
+    "time": "01.08.2018",
+    "actual": 12000,
+    "forecast": null
+  },
+  {
+    "time": "26.08.2018",
+    "actual": 1000,
+    "forecast": 8000
+  },
+  {
+    "time": "01.09.2018",
+    "actual": null,
+    "forecast": 8000
+  },
+  {
+    "time": "01.10.2018",
+    "actual": null,
+    "forecast": 20000
+  },
+  {
+    "time": "01.11.2018",
+    "actual": null,
+    "forecast": 23000
+  },
+  {
+    "time": "01.12.2018",
+    "actual": null,
+    "forecast": 21000
+  },
+  {
+    "time": "01.01.2019",
+    "actual": null,
+    "forecast": 12000
+  },
+  {
+    "time": "01.02.2019",
+    "actual": null,
+    "forecast": 11000
   }
 ]
