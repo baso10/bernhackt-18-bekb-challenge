@@ -120,7 +120,7 @@ class Orderscreen extends Component {
             <TextField
               type="text"
               value={product.name}
-              style={{ width: "50em", marginLeft: 20, paddingRight: 100 }}
+              style={{ marginLeft: 20, paddingRight: 50 }}
             />
             <Button
               id={index}
@@ -134,7 +134,7 @@ class Orderscreen extends Component {
         );
       });
     } else {
-      return <ListItem>Noch keine Leistungen auf der Rechnung....</ListItem>;
+      return <ListItem>Noch keine Leistungen vorhanden</ListItem>;
     }
   };
 
@@ -156,7 +156,7 @@ class Orderscreen extends Component {
             </Typography>
           </AppBar>
           <div style={{ marginTop: 100 }}>
-            <Typography variant="subheading">
+            <Typography variant="subheading" style={style}>
               Kunde / Leistung hinzufügen
             </Typography>
             <CreatableSelect
@@ -171,19 +171,27 @@ class Orderscreen extends Component {
             />
           </div>
           <Divider />
-          <Grid container justify="center" spacing={16}>
+          <Grid container justify="left" spacing={16}>
             <Grid item>
               <Paper className="customerPaper">
-                <div>
-                  <TextField type="text" placeholder="Kudenname" />
-                  <TextField type="password" placeholder="Adresse" />
-                  <TextField type="password" placeholder="Stadt" />
+                <div className="inputGroup">
+                  <div>
+                    <TextField type="text" placeholder="Kundenname" />
+                  </div>
+                  <div>
+                    <TextField type="text" placeholder="Adresse" />
+                  </div>
+                  <div>
+                    <TextField type="text" placeholder="Stadt" />
+                  </div>
                 </div>
               </Paper>
             </Grid>
             <Grid item>
-              <Paper>
-                <List className="productList">{this.productListRender()}</List>
+              <Paper className="paper">
+                <List className="productList" style={style}>
+                  {this.productListRender()}
+                </List>
               </Paper>
             </Grid>
           </Grid>
