@@ -30,10 +30,12 @@ class Dashboard extends React.Component {
           <Grid item xs={12} sm={6} style={{ marginTop: "1em" }}>
             <Paper className={classes.root} elevation={1}>
               <Typography variant="headline" component="h3">
-                You are running out of cash!
+                Das Geld wird langsam knapp!
               </Typography>
               <Typography component="p">
-                Did you issue all invoices this month?{" "}
+                Hast du alle Rechnungen diesen Monat ausgestellt?
+                <br />
+                <br />
                 <Button
                   variant="contained"
                   color="primary"
@@ -50,18 +52,22 @@ class Dashboard extends React.Component {
               style={{ marginTop: "1em" }}
             >
               <Typography variant="headline" component="h3">
-                Next level reached!
+                Glückwunsch! Nächstes Level erreicht!
               </Typography>
               <Typography component="p">
-                You are now level <b>16</b>. We trust you and can offer you
-                better terms on a credit this month{" "}
+                <h1>
+                  <b>16</b>
+                </h1>
+                Mit diesem Level hast du einen besseren Zinssatz.
+                <br />
+                <br />
                 <Button
                   variant="contained"
                   color="primary"
                   component={Link}
                   to="/invoices"
                 >
-                  Lend me money
+                  Geld ausleihen
                 </Button>
               </Typography>
             </Paper>
