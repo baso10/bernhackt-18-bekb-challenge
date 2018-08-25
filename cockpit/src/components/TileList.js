@@ -3,17 +3,18 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ReceiptIcon from "@material-ui/icons/Receipt";
+import { Link } from "react-router-dom";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 
-export const listItems = (
+export const menuItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/invoices">
       <ListItemIcon>
         <ReceiptIcon />
       </ListItemIcon>
-      <ListItemText primary="Invoices" />
+      <ListItemText>Invoices</ListItemText>
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/mycashflow">
       <ListItemIcon>
         <AccountBalanceIcon />
       </ListItemIcon>
