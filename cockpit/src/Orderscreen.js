@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
@@ -8,17 +7,18 @@ import Paper from "@material-ui/core/Paper";
 
 import ExitIcon from "@material-ui/icons/ExitToApp";
 import DeleteIcon from "@material-ui/icons/Delete";
+import withRoot from "./withRoot";
 
 import {
   Divider,
   List,
   ListItem,
-  TextField,
-  Input
-} from "../node_modules/@material-ui/core";
+  Tab,
+  Tabs,
+  TextField
+} from "@material-ui/core";
 
 import "./Orderscreen.css";
-import products from "./products.json";
 
 import CreatableSelect from "react-select/lib/Creatable";
 import { orderInput } from "./Utils/Alerts";
@@ -28,7 +28,7 @@ class Orderscreen extends Component {
     super(props);
     this.state = {
       //label: "Beispielprodukt", value:"Beispielprodukt"
-      productList: products,
+      productList: [],
       lastproductInvoice: [],
       productInvoice: [],
       exampleInvoice: [],
@@ -140,9 +140,8 @@ class Orderscreen extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div style={{ display: "inline-block", width: "90%" }}>
-          <AppBar
+      <div style={{ display: "inline-block", width: "90%" }}>
+        {/* <AppBar
             position="fixed"
             style={{ display: "inline-block", backgroundColor: "#cc0033" }}
           >
@@ -154,83 +153,82 @@ class Orderscreen extends Component {
             <Typography variant="headline" style={{ margin: 10 }}>
               Neue Offerte/Rechnung | 12345
             </Typography>
-          </AppBar>
-          <div style={{ marginTop: 100 }}>
-            <Typography variant="subheading" style={style}>
-              Kunde / Leistung hinzufügen
-            </Typography>
-            <CreatableSelect
-              autoFocus
-              isClearable
-              onKeyDown={this._addProductOnEnter}
-              onChange={this._handleChange}
-              style={center}
-              value={this.state.inputValue}
-              placeholder="Kunde | Produkt | Leistung"
-              options={this.state.productList}
-            />
-          </div>
-          <Divider />
-          <Grid container justify="left" spacing={16}>
-            <Grid item>
-              <Paper className="customerPaper">
-                <div className="inputGroup">
-                  <div>
-                    <TextField type="text" placeholder="Kundenname" />
-                  </div>
-                  <div>
-                    <TextField type="text" placeholder="Adresse" />
-                  </div>
-                  <div>
-                    <TextField type="text" placeholder="Stadt" />
-                  </div>
-                </div>
-              </Paper>
-            </Grid>
-            <Grid item>
-              <Paper className="paper">
-                <List className="productList" style={style}>
-                  {this.productListRender()}
-                </List>
-              </Paper>
-            </Grid>
-          </Grid>
-          <div id="bottomBar">
-            <Button
-              color="secondary"
-              variant="outlined"
-              style={style}
-              onClick={this.clearProductList}
-            >
-              Rechnung zurücksetzten
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              style={style}
-              onClick={this.sendInvoice}
-            >
-              Speichern
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              style={style}
-              onClick={this.sendInvoice}
-            >
-              PDF Export
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              style={style}
-              onClick={this.sendInvoice}
-            >
-              Senden / IaaS
-            </Button>
-          </div>
+          </AppBar> */}
+        <div style={{ marginTop: 100 }}>
+          <Typography variant="subheading" style={style}>
+            Kunde / Leistung hinzufügen
+          </Typography>
+          <CreatableSelect
+            autoFocus
+            isClearable
+            onKeyDown={this._addProductOnEnter}
+            onChange={this._handleChange}
+            style={center}
+            value={this.state.inputValue}
+            placeholder="Kunde | Produkt | Leistung"
+            options={this.state.productList}
+          />
         </div>
-      </MuiThemeProvider>
+        <Divider />
+        <Grid container justify="left" spacing={16}>
+          <Grid item>
+            <Paper className="customerPaper">
+              <div className="inputGroup">
+                <div>
+                  <TextField type="text" placeholder="Kundenname" />
+                </div>
+                <div>
+                  <TextField type="text" placeholder="Adresse" />
+                </div>
+                <div>
+                  <TextField type="text" placeholder="Stadt" />
+                </div>
+              </div>
+            </Paper>
+          </Grid>
+          <Grid item>
+            <Paper className="paper">
+              <List className="productList" style={style}>
+                {this.productListRender()}
+              </List>
+            </Paper>
+          </Grid>
+        </Grid>
+        <div id="bottomBar">
+          <Button
+            color="secondary"
+            variant="outlined"
+            style={style}
+            onClick={this.clearProductList}
+          >
+            Rechnung zurücksetzten
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            style={style}
+            onClick={this.sendInvoice}
+          >
+            Speichern
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            style={style}
+            onClick={this.sendInvoice}
+          >
+            PDF Export
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            style={style}
+            onClick={this.sendInvoice}
+          >
+            Senden / IaaS
+          </Button>
+        </div>
+      </div>
     );
   }
 }
@@ -251,4 +249,4 @@ const list = {
   margin: "0 auto"
 };
 
-export default Orderscreen;
+export default withRoot(Orderscreen);

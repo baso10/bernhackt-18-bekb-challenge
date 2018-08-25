@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { CardContent, Card } from "../../node_modules/@material-ui/core";
 import Logo from "../Logo/logo.jpg";
 import "./Login.css";
+import withRoot from "../withRoot";
 
 class Login extends Component {
   constructor(props) {
@@ -16,18 +16,12 @@ class Login extends Component {
   }
 
   handleClick = event => {
-    var apiBaseUrl = "http://localhost:4000/api/";
-    var payload = {
-      user: this.state.user,
-      password: this.state.password
-    };
-
     //TODO: Login Logic
     this.props.appContext.setState({ token: 1234, loginRequired: true });
   };
 
   handleKeyPress = event => {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       //TODO: Login Logic
       this.props.appContext.setState({ token: 1234, loginRequired: true });
     }
@@ -36,38 +30,35 @@ class Login extends Component {
   render() {
     return (
       <div className="flex-container">
-        <MuiThemeProvider>
-          <Card className="row">
-            <CardContent className="flex-item">
-              <img src={Logo} alt="Logo" style={{ width: "35%" }} />
-              <h2>BÄNZin</h2>
-
-              <div onKeyDown={this.handleKeyPress}>
-                <TextField
-                  type="text"
-                  placeholder="Kundennummer"
-                  onChange={newValue => this.setState({ user: newValue })}
-                />
-                <br />
-                <TextField
-                  type="password"
-                  placeholder="Passwort"
-                  onChange={newValue => this.setState({ password: newValue })}
-                />
-                <br />
-                <Button
-                  autoFocus
-                  variant="outlined"
-                  primary={true}
-                  style={style}
-                  onClick={this.handleClick}
-                >
-                  Login
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </MuiThemeProvider>
+        <Card className="row">
+          <CardContent className="flex-item">
+            <img src={Logo} alt="Logo" style={{ width: "35%" }} />
+            <h2>BÄNZin</h2>
+            <div onKeyDown={this.handleKeyPress}>
+              <TextField
+                type="text"
+                placeholder="Kundennummer"
+                onChange={newValue => this.setState({ user: newValue })}
+              />
+              <br />
+              <TextField
+                type="password"
+                placeholder="Passwort"
+                onChange={newValue => this.setState({ password: newValue })}
+              />
+              <br />
+              <Button
+                autoFocus
+                variant="outlined"
+                color="primary"
+                style={style}
+                onClick={this.handleClick}
+              >
+                Login
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -77,4 +68,4 @@ const style = {
   margin: 15
 };
 
-export default Login;
+export default withRoot(Login);
