@@ -1,0 +1,25 @@
+.center {
+    display: "block";
+    max-width: "500px";
+    margin: "auto";
+}
+
+.productlist {
+    display: "block";
+    margin: "auto";
+    overflow: "scroll";
+    max-height: "400px";
+}
+
+.paper {
+    margin: 2em;
+}
+
+.customerPaper {
+    margin: 2em;
+    align-content: left;
+}
+
+.inputGroup {
+    padding: 20px;
+}
