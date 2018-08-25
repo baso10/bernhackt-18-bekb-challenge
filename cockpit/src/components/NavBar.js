@@ -14,6 +14,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { menuItems } from "./TileList";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 
 const styles = {
   root: {
@@ -111,7 +112,7 @@ class NavBar extends Component {
                 open={open}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                <MenuItem component={Link} to="/me">Profile</MenuItem>
                 <MenuItem onClick={this.handleClose}>My account</MenuItem>
               </Menu>
             </div>
