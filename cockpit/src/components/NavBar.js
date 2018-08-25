@@ -31,6 +31,9 @@ const styles = {
   },
   fullList: {
     width: "auto"
+  },
+  img: {
+    height: 30
   }
 };
 
@@ -83,6 +86,7 @@ class NavBar extends Component {
             >
               <MenuIcon />
             </IconButton>
+            <img className={classes.img} src={require("../Logo/logo.jpg")} />
             <Typography
               variant="title"
               color="inherit"
