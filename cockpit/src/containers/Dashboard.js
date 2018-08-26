@@ -56,7 +56,7 @@ class Dashboard extends React.Component {
                     component={Link}
                     to="/me"
                   >
-                    Meine Benefits
+                    Mein Profil
                   </Button>
                 </Typography>
               </Paper>
