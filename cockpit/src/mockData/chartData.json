@@ -1,4 +1,5 @@
-[{
+[
+  {
     "time": "01.05.2018",
     "actual": 11000,
     "forecast": null
@@ -19,7 +20,7 @@
     "forecast": null
   },
   {
-    "time": "26.08.2018",
+    "time": "27.08.2018",
     "actual": 1000,
     "forecast": 8000
   },
