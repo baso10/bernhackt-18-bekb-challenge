@@ -117,9 +117,10 @@ class NavBar extends Component {
                 onClose={this.handleClose}
               >
                 <MenuItem component={Link} to="/me">
-                  Profile
+                  Profil
                 </MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                <MenuItem onClick={this.handleClose}>Einstellungen</MenuItem>
+                <MenuItem onClick={this.handleClose}>Logout</MenuItem>
               </Menu>
             </div>
           </Toolbar>

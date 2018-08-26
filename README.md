@@ -9,3 +9,7 @@ cd cockpit
 npm install
 npm start
 ```
+
+## Demo
+
+You can find a Demo [here](https://bernhackt-18-bekb-challenge.azurewebsites.net/mycashflow)
