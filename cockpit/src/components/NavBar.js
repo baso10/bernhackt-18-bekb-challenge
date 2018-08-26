@@ -14,6 +14,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { menuItems } from "./TileList";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 
 const styles = {
   root: {
@@ -94,7 +95,11 @@ class NavBar extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <img className={classes.img} src={require("../Logo/logo.jpg")} />
+            <img
+              className={classes.img}
+              alt={"logo"}
+              src={require("../Logo/logo.jpg")}
+            />
             <Typography variant="title" className={classes.flex}>
               BEKB
             </Typography>
@@ -114,8 +119,11 @@ class NavBar extends Component {
                 open={open}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                <MenuItem component={Link} to="/me">
+                  Profil
+                </MenuItem>
+                <MenuItem onClick={this.handleClose}>Einstellungen</MenuItem>
+                <MenuItem onClick={this.handleClose}>Logout</MenuItem>
               </Menu>
             </div>
           </Toolbar>

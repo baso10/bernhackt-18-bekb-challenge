@@ -14,7 +14,7 @@ class App extends Component {
         <div>
           <NavBar />
           <Route exact path="/" component={Orderscreen} />
-          <Route path="/my" component={Profile} />
+          <Route path="/me" component={Profile} />
           <Route path="/mycashflow" component={Dashboard} />
           <Route path="/invoices" component={Orderscreen} />
         </div>
