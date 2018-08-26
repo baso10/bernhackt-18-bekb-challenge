@@ -54,13 +54,14 @@ class Dashboard extends React.Component {
                     variant="contained"
                     color="primary"
                     component={Link}
-                    to="/invoices"
+                    to="/me"
                   >
-                    Geld ausleihen
+                    Meine Benefits
                   </Button>
                 </Typography>
               </Paper>
             </Grid>
+
             <Grid item xs={12} style={{ marginTop: "1em" }}>
               <Paper className={classes.root} elevation={1} square={true}>
                 <Typography variant="headline" component="h3">
@@ -71,12 +72,16 @@ class Dashboard extends React.Component {
                   <br />
                   <br />
                   <Button
+                    style={{ margin: 5 }}
                     variant="contained"
                     color="primary"
                     component={Link}
                     to="/invoices"
                   >
                     Neue Rechnung
+                  </Button>
+                  <Button variant="contained" color="primary">
+                    Mikrokredit Anfordern
                   </Button>
                 </Typography>
               </Paper>

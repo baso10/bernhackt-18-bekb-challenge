@@ -18,5 +18,19 @@
     "value": "Administration",
     "rate": 20,
     "hourly": true
+  },
+  {
+    "ID": 4,
+    "label": "Pflanzendünger",
+    "value": "Pflanzendünger",
+    "rate": 5,
+    "hourly": false
+  },
+  {
+    "ID": 4,
+    "label": "Schaufel",
+    "value": "Schaufel",
+    "rate": 25,
+    "hourly": false
   }
 ]

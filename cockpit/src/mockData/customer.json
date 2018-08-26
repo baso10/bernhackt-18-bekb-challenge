@@ -13,8 +13,8 @@
   },
   {
     "ID": 2,
-    "value": "Frau Iseli",
-    "label": "Frau Iseli",
+    "value": "Beatrice Iseli",
+    "label": "Beatrice Iseli",
     "street": "Worbstrasse",
     "houseNo": 666,
     "city": "Bern",
@@ -39,8 +39,8 @@
   },
   {
     "ID": 4,
-    "value": "Bernnhard Schlick",
-    "label": "Bernnhard Schlick",
+    "value": "Bernhard Schlinck",
+    "label": "Bernhard Schlinck",
     "street": "Schwarzenburg",
     "houseNo": 5,
     "city": "Worb",
