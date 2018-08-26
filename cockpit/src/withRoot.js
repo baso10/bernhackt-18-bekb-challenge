@@ -23,17 +23,6 @@ const theme = createMuiTheme({
   }
 });
 
-// /* Page 1: */
-// background: #FFFFFF;
-// /* rote linie: */
-// background: #CC0033;
-// /* logo bekb: */
-// /* Login: */
-// font - family: .AppleSystemUIFont;
-// font - size: 16px;
-// color: #000000;
-// /* schloss: */
-
 function withRoot(Component) {
   function WithRoot(props) {
     // MuiThemeProvider makes the theme available down the React tree
