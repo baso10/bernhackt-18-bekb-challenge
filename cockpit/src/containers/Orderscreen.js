@@ -3,17 +3,17 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
-import withRoot from "./withRoot";
+import withRoot from "../withRoot";
 import { Link } from "react-router-dom";
 
 import { Divider, List, ListItem, TextField } from "@material-ui/core";
 
-import { alert } from "./Utils/Alerts";
-import Select from "./components/Select";
+import { alert } from "../Utils/Alerts";
+import Select from "../components/Select";
 
 import "./Orderscreen.css";
-import customerList from "./mockData/customer.json";
-import productList from "./mockData/product.json";
+import customerList from "../mockData/customer.json";
+import productList from "../mockData/product.json";
 
 class Orderscreen extends Component {
   constructor(props) {
