@@ -1,7 +1,7 @@
-[
-  {
+[{
     "ID": 1,
-    "name": "Bänz",
+    "value": "Peter Ingwer",
+    "label": "Peter Ingwer",
     "street": "Zentrumstrasse",
     "houseNo": 1,
     "city": "Bern",
@@ -13,7 +13,8 @@
   },
   {
     "ID": 2,
-    "name": "Frau Iseli",
+    "value": "Frau Iseli",
+    "label": "Frau Iseli",
     "street": "Worbstrasse",
     "houseNo": 666,
     "city": "Bern",
@@ -25,8 +26,22 @@
   },
   {
     "ID": 3,
-    "name": "Gärtnerutensilien GmbH",
+    "value": "Gärtnerutensilien GmbH",
+    "label": "Gärtnerutensilien GmbH",
     "street": "Bernstrasse",
+    "houseNo": 5,
+    "city": "Worb",
+    "zip": 3076,
+    "level": 12,
+    "points": "16000",
+    "contactHours": "09:00-17:00",
+    "private": false
+  },
+  {
+    "ID": 4,
+    "value": "Bernnhard Schlick",
+    "label": "Bernnhard Schlick",
+    "street": "Schwarzenburg",
     "houseNo": 5,
     "city": "Worb",
     "zip": 3076,

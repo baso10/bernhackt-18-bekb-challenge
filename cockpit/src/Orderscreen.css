@@ -1,25 +1,39 @@
-.center {
-    display: "block";
-    max-width: "500px";
-    margin: "auto";
+.customerPaperItem {
+    margin: "0 auto";
+    padding: 10
 }
 
-.productlist {
-    display: "block";
-    margin: "auto";
-    overflow: "scroll";
-    max-height: "400px";
+.mainCenter {
+    text-align: center;
+    margin: 10 auto;
+    margin-top: 20;
+    padding: 1em;
 }
 
-.paper {
-    margin: 2em;
+#customerSelect {
+    margin: 0 auto;
+    width: 60%;
 }
 
-.customerPaper {
-    margin: 2em;
-    align-content: left;
+#customerTitleText {
+    align-content: center;
 }
 
-.inputGroup {
-    padding: 20px;
+.bottomBar {
+    align-content: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.bottomBarButtons {
+    margin: 10;
+}
+
+.listItemContent {
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.paperContent {
+    padding: 1em;
 }
