@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import Orderscreen from "./Orderscreen";
+import Orderscreen from "./containers/Orderscreen";
 import withRoot from "./withRoot";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "./containers/NavBar";
 import Dashboard from "./containers/Dashboard";
 import Profile from "./containers/Profile";
 
