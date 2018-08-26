@@ -18,3 +18,13 @@
 #customerTitleText {
     align-content: center;
 }
+
+.bottomBar {
+    align-content: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.bottomBarButtons {
+    margin: 10;
+}

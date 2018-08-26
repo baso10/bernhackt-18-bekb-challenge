@@ -24,7 +24,9 @@ class Orderscreen extends Component {
       productInvoice: [],
       exampleInvoice: [],
       inputValue: "",
-      customerList: customerList
+      customerList: customerList,
+      customer: null,
+      innvoiceTotal: 0
     };
 
     //TODO: this.getLastOrders();
@@ -47,9 +49,7 @@ class Orderscreen extends Component {
     this.setState({ productInvoice: [] });
   };
 
-  sendInvoice = () => {
-    console.log("sendInvoice");
-  };
+  sendInvoice = () => {};
 
   //TODO: Tabs Layout and Code Refactoring FIX
   productListRender = () => {
@@ -66,7 +66,7 @@ class Orderscreen extends Component {
               aria-label="Delete"
               onClick={that.deleteItem}
             >
-              <DeleteIcon />
+              <DeleteIcon style={{ float: "right" }} />
             </Button>
           </ListItem>
         );
@@ -82,7 +82,7 @@ class Orderscreen extends Component {
 
   addItemToProductList = newItem => {
     console.log(newItem);
-    alert("Menge für " + newItem.name, "Anzahl | Stunden | Stück")
+    alert("Menge für " + newItem.name, "Anzahl | Stunden")
       .then(result => {
         if (result.value) {
           newItem.count = result.value;
@@ -97,48 +97,63 @@ class Orderscreen extends Component {
   render = () => {
     const productList = (
       <div>
-        <Paper className="paper">
-          <Select
-            addItem={this.addItemToProductList}
-            placeholder={"Produkt | Leistung | Artikelnummer"}
-          />
-          <Grid item>
-            <Divider />
-            <List className="productList">{this.productListRender()}</List>
+        <h3 className="mainCenter">Neue Offerte/Rechnung für Frau Iseli</h3>
+        <Grid container spacing={24} className="customerContainer">
+          <Grid item xs={2} />
+          <Grid item xs={8}>
+            <Paper className="paper">
+              <Select
+                addItem={this.addItemToProductList}
+                placeholder={"Produkt | Leistung | Artikelnummer"}
+              />
+              <Grid item>
+                <Divider />
+                <List className="productList">{this.productListRender()}</List>
+              </Grid>
+            </Paper>
+            <h2 style={{ textAlign: "right" }}>
+              Total: {this.state.innvoiceTotal}
+            </h2>
+            <br />
+            <Paper style={{ marginTop: 10 }}>
+              <div className="bottomBar">
+                <Button
+                  style={{ margin: 10 }}
+                  color="secondary"
+                  variant="outlined"
+                  onClick={this.clearProductList}
+                >
+                  Rechnung zurücksetzten
+                </Button>
+                <Button
+                  style={{ margin: 10 }}
+                  color="primary"
+                  variant="outlined"
+                  onClick={this.sendInvoice}
+                >
+                  Speichern
+                </Button>
+                <Button
+                  style={{ margin: 10 }}
+                  color="primary"
+                  variant="outlined"
+                  onClick={this.sendInvoice}
+                >
+                  PDF Export
+                </Button>
+                <Button
+                  style={{ margin: 10 }}
+                  color="primary"
+                  variant="outlined"
+                  onClick={this.sendInvoice}
+                >
+                  Senden / IaaS
+                </Button>
+              </div>
+            </Paper>
+            <Grid item xs={2} />
           </Grid>
-        </Paper>
-        <Paper>
-          <div id="bottomBar">
-            <Button
-              color="secondary"
-              variant="outlined"
-              onClick={this.clearProductList}
-            >
-              Rechnung zurücksetzten
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              onClick={this.sendInvoice}
-            >
-              Speichern
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              onClick={this.sendInvoice}
-            >
-              PDF Export
-            </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              onClick={this.sendInvoice}
-            >
-              Senden / IaaS
-            </Button>
-          </div>
-        </Paper>
+        </Grid>
       </div>
     );
 
@@ -149,6 +164,7 @@ class Orderscreen extends Component {
           <Paper>
             <h2 className="mainCenter">Kunde auswählen: </h2>
             <Select
+              autoFocus
               id="customerSelect"
               addItem={this.addCustomer}
               placeholder={"Name | Kundennummer | Adresse"}
@@ -156,7 +172,6 @@ class Orderscreen extends Component {
             />
           </Paper>
         </Grid>
-        <Grid item xs={2} />
       </Grid>
     );
 
