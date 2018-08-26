@@ -34,9 +34,19 @@ class Dashboard extends React.Component {
                   Glückwunsch! Nächstes Level erreicht!
                 </Typography>
                 <Typography component="p">
-                  <h1>
-                    <b>16</b>
-                  </h1>
+                  <b
+                    style={{
+                      display: "block",
+                      fontSize: "2em",
+                      marginTop: " 0.67em",
+                      marginBottom: "0.67em",
+                      marginLeft: 0,
+                      marginRight: 0,
+                      fontWeight: "bold"
+                    }}
+                  >
+                    16
+                  </b>
                   Mit diesem Level hast du einen besseren Zinssatz.
                   <br />
                   <br />
