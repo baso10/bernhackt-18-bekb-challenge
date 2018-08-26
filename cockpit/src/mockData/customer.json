@@ -1,7 +1,7 @@
 [{
     "ID": 1,
-    "value": "Peter",
-    "label": "Ingwer",
+    "value": "Peter Ingwer",
+    "label": "Peter Ingwer",
     "street": "Zentrumstrasse",
     "houseNo": 1,
     "city": "Bern",

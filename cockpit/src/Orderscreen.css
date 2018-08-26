@@ -28,3 +28,12 @@
 .bottomBarButtons {
     margin: 10;
 }
+
+.listItemContent {
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.paperContent {
+    padding: 1em;
+}

@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import withRoot from "./withRoot";
+import { Link } from "react-router-dom";
 
 import { Divider, List, ListItem, TextField } from "@material-ui/core";
 
@@ -26,7 +27,7 @@ class Orderscreen extends Component {
       inputValue: "",
       customerList: customerList,
       customer: null,
-      innvoiceTotal: 0
+      invoiceTotal: 0
     };
 
     //TODO: this.getLastOrders();
@@ -42,7 +43,9 @@ class Orderscreen extends Component {
     const index = event.target.getAttribute("id");
     const tempList = [...this.state.productInvoice];
     tempList.splice(index, 1);
-    this.setState({ productInvoice: tempList });
+    this.setState({ productInvoice: tempList }, () => {
+      this.calcTotal();
+    });
   };
 
   clearProductList = () => {
@@ -58,9 +61,23 @@ class Orderscreen extends Component {
       return this.state.productInvoice.map(function(product, index) {
         return (
           <ListItem key={index}>
-            <TextField type="text" value={product.count} />
-            <p>{product.name}</p>
+            <TextField
+              type="text"
+              value={product.count}
+              className="listItemContent"
+            />
+            <p>x</p>
+            <p className="listItemContent"> à</p>
+            <p>
+              {product.rate}
+              .-
+            </p>
+            <p className="listItemContent">{product.name}</p>
+            <p className="listItemContent">
+              {that.calcPriceFromRate(product) + ".-"}
+            </p>
             <Button
+              className="listItemContent"
               id={index}
               variant="fab"
               aria-label="Delete"
@@ -81,17 +98,30 @@ class Orderscreen extends Component {
   };
 
   addItemToProductList = newItem => {
-    console.log(newItem);
-    alert("Menge für " + newItem.name, "Anzahl | Stunden")
-      .then(result => {
-        if (result.value) {
-          newItem.count = result.value;
-          this.setState(curState => ({
-            productInvoice: [...curState.productInvoice, newItem]
-          }));
-        }
-      })
-      .then(console.log(this.state.productList));
+    alert("Menge für " + newItem.name, "Anzahl | Stunden").then(result => {
+      if (result.value) {
+        newItem.count = result.value;
+        this.setState(curState => ({
+          productInvoice: [...curState.productInvoice, newItem]
+        }));
+        this.calcTotal();
+      }
+    });
+  };
+
+  calcPriceFromRate = product => {
+    return parseFloat(product.rate) * parseFloat(product.count);
+  };
+
+  calcTotal = () => {
+    const productInvoice = this.state.productInvoice;
+    var tempTotal = 0;
+    productInvoice.forEach(function(product) {
+      tempTotal += parseFloat(product.rate) * parseFloat(product.count);
+    });
+    this.setState({
+      invoiceTotal: tempTotal
+    });
   };
 
   render = () => {
@@ -101,18 +131,22 @@ class Orderscreen extends Component {
         <Grid container spacing={24} className="customerContainer">
           <Grid item xs={2} />
           <Grid item xs={8}>
-            <Paper className="paper">
+            <Paper>
               <Select
                 addItem={this.addItemToProductList}
                 placeholder={"Produkt | Leistung | Artikelnummer"}
+                inputList={this.state.productList}
               />
+            </Paper>
+            <Paper className="paper" style={{ marginTop: 10 }}>
               <Grid item>
                 <Divider />
                 <List className="productList">{this.productListRender()}</List>
               </Grid>
             </Paper>
-            <h2 style={{ textAlign: "right" }}>
-              Total: {this.state.innvoiceTotal}
+            <h2 style={{ textAlign: "center" }}>
+              Total: {this.state.invoiceTotal}
+              .-
             </h2>
             <br />
             <Paper style={{ marginTop: 10 }}>
@@ -130,6 +164,8 @@ class Orderscreen extends Component {
                   color="primary"
                   variant="outlined"
                   onClick={this.sendInvoice}
+                  component={Link}
+                  to="/mycashflow"
                 >
                   Speichern
                 </Button>
@@ -138,6 +174,8 @@ class Orderscreen extends Component {
                   color="primary"
                   variant="outlined"
                   onClick={this.sendInvoice}
+                  component={Link}
+                  to="/mycashflow"
                 >
                   PDF Export
                 </Button>
@@ -146,6 +184,8 @@ class Orderscreen extends Component {
                   color="primary"
                   variant="outlined"
                   onClick={this.sendInvoice}
+                  component={Link}
+                  to="/mycashflow"
                 >
                   Senden / IaaS
                 </Button>

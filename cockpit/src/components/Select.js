@@ -10,13 +10,22 @@ class Select extends React.Component {
     };
   }
   _handleChange = (newValue, actionMeta) => {
+    console.log("OK");
+    console.log(newValue);
     var newItem = {
-      name: ""
+      ID: 0,
+      label: "",
+      value: "",
+      rate: 0,
+      hourly: []
     };
 
     if (newValue.length !== 0) {
       this.setState({ inputValue: newValue });
+      newItem.id = newValue.id;
       newItem.name = newValue.label;
+      newItem.rate = newValue.rate;
+      newItem.value = newValue.value;
       //var tempList = this.state.productInvoice;
       this.props.addItem(newItem);
     }
