@@ -107,7 +107,7 @@ class CashFlowChart extends React.Component {
 
     const { classes } = this.props;
     return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={1} square={true}>
         <Line data={cfg} options={opts} />
       </Paper>
     );

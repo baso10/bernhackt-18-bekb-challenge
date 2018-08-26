@@ -24,53 +24,53 @@ class Dashboard extends React.Component {
     return (
       <div style={{ margin: 1 + "em" }}>
         <Grid container spacing={24}>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={8}>
             <CashFlowChart />
           </Grid>
-          <Grid item xs={12} sm={6} style={{ marginTop: "1em" }}>
-            <Paper className={classes.root} elevation={1}>
-              <Typography variant="headline" component="h3">
-                Das Geld wird langsam knapp!
-              </Typography>
-              <Typography component="p">
-                Hast du alle Rechnungen diesen Monat ausgestellt?
-                <br />
-                <br />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  component={Link}
-                  to="/invoices"
-                >
-                  Neue Rechnung
-                </Button>
-              </Typography>
-            </Paper>
-            <Paper
-              className={classes.root}
-              elevation={1}
-              style={{ marginTop: "1em" }}
-            >
-              <Typography variant="headline" component="h3">
-                Glückwunsch! Nächstes Level erreicht!
-              </Typography>
-              <Typography component="p">
-                <h1>
-                  <b>16</b>
-                </h1>
-                Mit diesem Level hast du einen besseren Zinssatz.
-                <br />
-                <br />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  component={Link}
-                  to="/invoices"
-                >
-                  Geld ausleihen
-                </Button>
-              </Typography>
-            </Paper>
+          <Grid item xs={12} sm={4}>
+            <Grid item xs={12}>
+              <Paper className={classes.root} elevation={1} square={true}>
+                <Typography variant="headline" component="h3">
+                  Glückwunsch! Nächstes Level erreicht!
+                </Typography>
+                <Typography component="p">
+                  <h1>
+                    <b>16</b>
+                  </h1>
+                  Mit diesem Level hast du einen besseren Zinssatz.
+                  <br />
+                  <br />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    to="/invoices"
+                  >
+                    Geld ausleihen
+                  </Button>
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} style={{ marginTop: "1em" }}>
+              <Paper className={classes.root} elevation={1} square={true}>
+                <Typography variant="headline" component="h3">
+                  Das Geld wird langsam knapp!
+                </Typography>
+                <Typography component="p">
+                  Hast du alle Rechnungen diesen Monat ausgestellt?
+                  <br />
+                  <br />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    to="/invoices"
+                  >
+                    Neue Rechnung
+                  </Button>
+                </Typography>
+              </Paper>
+            </Grid>
           </Grid>
         </Grid>
         <CustomizedSnackbar />
