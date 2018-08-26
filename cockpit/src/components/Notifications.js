@@ -119,8 +119,8 @@ class CustomizedSnackbar extends React.Component {
         >
           <MySnackbarContentWrapper
             onClose={this.handleClose}
-            variant="info"
-            message="Erstelle 5 neue Rechnungen, um ein Level aufzusteigen!"
+            variant="success"
+            message="Rechnung für Frau Iseli erfolgreich gesendet! +10 Punkte"
           />
         </Snackbar>
       </div>
