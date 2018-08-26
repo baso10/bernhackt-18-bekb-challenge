@@ -1,6 +1,5 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import CreatableSelect from "react-select/lib/Creatable";
 
 const styles = theme => ({
   root: {
