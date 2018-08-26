@@ -87,7 +87,11 @@ class NavBar extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <img className={classes.img} src={require("../Logo/logo.jpg")} />
+            <img
+              className={classes.img}
+              alt="logo"
+              src={require("../Logo/logo.jpg")}
+            />
             <Typography
               variant="title"
               color="inherit"
@@ -112,7 +116,9 @@ class NavBar extends Component {
                 open={open}
                 onClose={this.handleClose}
               >
-                <MenuItem component={Link} to="/me">Profile</MenuItem>
+                <MenuItem component={Link} to="/me">
+                  Profile
+                </MenuItem>
                 <MenuItem onClick={this.handleClose}>My account</MenuItem>
               </Menu>
             </div>
