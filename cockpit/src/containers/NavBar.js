@@ -11,7 +11,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Drawer from "@material-ui/core/Drawer";
-import { menuItems } from "./TileList";
+import { menuItems } from "../components/TileList";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
@@ -25,7 +25,7 @@ const styles = {
     backgroundColor: "#cc0033"
   },
   bar: {
-    backgroundColor: "#eff2f4"
+    backgroundColor: "#fff"
   },
   flex: {
     flexGrow: 1
