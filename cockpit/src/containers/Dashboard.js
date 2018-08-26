@@ -50,12 +50,7 @@ class Dashboard extends React.Component {
                   Mit diesem Level hast du einen besseren Zinssatz.
                   <br />
                   <br />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to="/invoices"
-                  >
+                  <Button variant="contained" color="primary">
                     Geld ausleihen
                   </Button>
                 </Typography>

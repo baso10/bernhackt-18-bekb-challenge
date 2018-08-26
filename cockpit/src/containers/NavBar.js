@@ -25,7 +25,7 @@ const styles = {
     backgroundColor: "#cc0033"
   },
   bar: {
-    backgroundColor: "#eff2f4"
+    backgroundColor: "#fff"
   },
   flex: {
     flexGrow: 1
