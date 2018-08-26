@@ -20,6 +20,13 @@ const styles = {
   root: {
     flexGrow: 1
   },
+  line: {
+    height: 5,
+    backgroundColor: "#cc0033"
+  },
+  bar: {
+    backgroundColor: "#eff2f4"
+  },
   flex: {
     flexGrow: 1
   },
@@ -34,7 +41,8 @@ const styles = {
     width: "auto"
   },
   img: {
-    height: 30
+    height: 30,
+    marginRight: "0.5em"
   }
 };
 
@@ -77,11 +85,11 @@ class NavBar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <div className={classes.line} />
+        <AppBar position="static" className={classes.bar} elevation={1}>
           <Toolbar>
             <IconButton
               className={classes.menuButton}
-              color="inherit"
               aria-label="Menu"
               onClick={this.toggleDrawer("left", true)}
             >
@@ -89,14 +97,10 @@ class NavBar extends Component {
             </IconButton>
             <img
               className={classes.img}
-              alt="logo"
+              alt={"logo"}
               src={require("../Logo/logo.jpg")}
             />
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.flex}
-            >
+            <Typography variant="title" className={classes.flex}>
               BEKB
             </Typography>
             <div>
@@ -104,7 +108,6 @@ class NavBar extends Component {
                 aria-owns={open ? "menu-appbar" : null}
                 aria-haspopup="true"
                 onClick={this.handleMenu}
-                color="inherit"
               >
                 <AccountCircle />
               </IconButton>
